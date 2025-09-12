@@ -19,6 +19,9 @@ function PainelConteudo() {
     });
   }, [token, sair]);
 
+  const ehAdmin = usuario?.cargo === "ADMIN";
+  const ehProfessor = usuario?.cargo === "PROFESSOR";
+
   return (
     <Box p={6}>
       <Stack direction="row" justify="space-between" align="center" mb={6}>
@@ -34,12 +37,22 @@ function PainelConteudo() {
       </Box>
 
       <Stack direction="row" mt={6}>
+        {/* qualquer autenticado */}
         <Button asChild>
           <Link href="/avaliacoes">Avaliações</Link>
         </Button>
-        {usuario?.cargo === "ADMIN" && (
+
+        {/* ADMIN: gerencia todos os usuários */}
+        {ehAdmin && (
           <Button asChild variant="outline">
             <Link href="/usuarios">Usuários</Link>
+          </Button>
+        )}
+
+        {/* PROFESSOR: gerencia apenas ALUNOS (sua tela dedicada) */}
+        {ehProfessor && (
+          <Button asChild variant="outline">
+            <Link href="/alunos">Alunos</Link>
           </Button>
         )}
       </Stack>

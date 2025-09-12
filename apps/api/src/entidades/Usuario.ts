@@ -25,8 +25,7 @@ export class Usuario {
   senhaHash!: string;
 
   // ✅ tipagem forte com o enum compartilhado, sem mudar o tipo físico no SQLite
-  // (se usar Postgres no futuro, pode trocar para: type: "enum", enum: Cargo, enumName: "cargo_enum")
-  // (ou para compatibilidade ampla: type: "simple-enum", enum: Cargo)
+
   @Column({ type: "text" })
   cargo!: Cargo;
 

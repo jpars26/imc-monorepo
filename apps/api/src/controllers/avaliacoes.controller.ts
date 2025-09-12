@@ -7,6 +7,12 @@ import { Avaliacao } from "../entidades/Avaliacao";
 import { calcularIMC, classificarIMC } from "../dominio/imc";
 import { Cargo } from "@imc/shared";
 
+// helper: converte "1,70" -> "1.70"
+const numeroPt = (max: number) =>
+  z.preprocess((v) => (typeof v === "string" ? v.replace(",", ".") : v),
+    z.coerce.number().positive().max(max)
+  );
+
 /** Schemas */
 const AvaliacaoQuerySchema = z.object({
   idAluno: z.string().uuid().optional(),
@@ -15,14 +21,14 @@ const AvaliacaoQuerySchema = z.object({
 
 const AvaliacaoCriarSchema = z.object({
   idAluno: z.string().uuid(),
-  alturaM: z.number().positive().max(3),
-  pesoKg: z.number().positive().max(400),
+  alturaM: numeroPt(3),
+  pesoKg: numeroPt(400),
   idProfessor: z.string().uuid().optional(),
 });
 
 const AvaliacaoAtualizarSchema = z.object({
-  alturaM: z.number().positive().max(3).optional(),
-  pesoKg: z.number().positive().max(400).optional(),
+  alturaM: numeroPt(3).optional(),
+  pesoKg: numeroPt(400).optional(),
 });
 
 export const validarCriarAvaliacao = AvaliacaoCriarSchema;

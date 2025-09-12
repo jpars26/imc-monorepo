@@ -34,6 +34,12 @@ export async function listarUsuarios(_req: Request, res: Response) {
   res.json(usuarios);
 }
 
+export async function listarAlunosParaProfessor(_req: Request, res: Response) {
+  const repo = dataSource.getRepository(Usuario);
+  const alunos = await repo.find({ where: { cargo: Cargo.ALUNO as any, ativo: true } });
+  res.json(alunos);
+}
+
 export async function criarUsuario(req: Request, res: Response) {
   const { nome, email, senha, cargo } = req.body as z.infer<typeof UsuarioCriarSchema>;
   const repo = dataSource.getRepository(Usuario);

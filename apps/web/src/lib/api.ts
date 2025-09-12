@@ -96,3 +96,50 @@ export async function criarAvaliacao(
     })
   );
 }
+
+// ----- PROFESSOR: listar somente ALUNOS (ativos) -----
+export async function listarAlunos(token: string) {
+  return getData<Usuario[]>(
+    api.get("/usuarios/alunos", { headers: { Authorization: `Bearer ${token}` } })
+  );
+}
+
+// ----- PROFESSOR: criar/editar ALUNO -----
+export async function professorCriarAluno(
+  token: string,
+  dados: { nome: string; email: string; senha: string }
+) {
+  // cargo é sempre ALUNO
+  return getData<Usuario>(
+    api.post("/usuarios/alunos", { ...dados, cargo: "ALUNO" }, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+  );
+}
+
+export async function professorAtualizarAluno(
+  token: string,
+  id: string,
+  dados: Partial<{ nome: string; email: string; senha: string; ativo: boolean }>
+) {
+  // não permitimos cargo aqui
+  const { nome, email, senha, ativo } = dados;
+  return getData<Usuario>(
+    api.patch(`/usuarios/alunos/${id}`, { nome, email, senha, ativo }, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+  );
+}
+
+// --- AVALIAÇÕES: atualizar (ADMIN; PROF só as próprias) ---
+export async function atualizarAvaliacao(
+  token: string,
+  id: string,
+  dados: Partial<{ alturaM: number; pesoKg: number }>
+) {
+  return getData<Avaliacao>(
+    api.patch(`/avaliacoes/${id}`, dados, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+  );
+}

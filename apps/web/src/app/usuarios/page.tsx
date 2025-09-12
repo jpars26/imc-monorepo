@@ -23,6 +23,7 @@ import {
   deletarUsuario,
 } from "../../lib/api";
 import { Guard } from "../../components/Guard";
+import { BotaoVoltar } from "../../components/BotaoVoltar";
 
 const cargos: Cargo[] = ["ADMIN", "PROFESSOR", "ALUNO"];
 
@@ -102,6 +103,7 @@ function UsuariosConteudo() {
     <Box p={6}>
       <Flex justify="space-between" align="center" mb={6}>
         <Heading size="lg">Usuários</Heading>
+        <BotaoVoltar />
         <Button variant="outline" onClick={sair}>Sair</Button>
       </Flex>
 
@@ -117,7 +119,8 @@ function UsuariosConteudo() {
         <Input placeholder="Senha" type="password" value={senha} onChange={(e) => setSenha(e.target.value)} />
 
         {/* Chakra v3: NativeSelect (em vez de Select direto) */}
-        <NativeSelect.Root size="sm" width="180px">
+        <NativeSelect.Root size={{ base: "md", md: "sm" }}
+              w={{ base: "100%", md: "260px", lg: "500px" }}>
           <NativeSelect.Field
             value={cargo}
             onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>

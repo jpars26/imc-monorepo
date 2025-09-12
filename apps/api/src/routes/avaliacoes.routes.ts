@@ -1,12 +1,27 @@
-// apps/api/src/routes/avaliacoes.routes.ts
 import { Router } from "express";
-import { autenticar } from "../middlewares/autenticacao";
+import { autenticar, exigirCargo } from "../middlewares/autenticacao";
 import { validar } from "../middlewares/validar";
-import { listarAvaliacoes, criarAvaliacao, validarCriarAvaliacao, atualizarAvaliacao, deletarAvaliacao } from "../controllers/avaliacoes.controller";
+import {
+  listarAvaliacoes,
+  criarAvaliacao,
+  atualizarAvaliacao,           // 👈 novo
+  validarCriarAvaliacao,
+  validarAtualizarAvaliacao,    // 👈 novo
+} from "../controllers/avaliacoes.controller";
+import { Cargo } from "@imc/shared";
 
 const r = Router();
+
 r.get("/", autenticar, listarAvaliacoes);
 r.post("/", autenticar, validar(validarCriarAvaliacao), criarAvaliacao);
-r.patch("/:id", autenticar, atualizarAvaliacao);
-r.delete("/:id", autenticar, deletarAvaliacao);
+
+// ADMIN ou PROF podem editar; PROF só a própria
+r.patch(
+  "/:id",
+  autenticar,
+  exigirCargo(Cargo.ADMIN, Cargo.PROFESSOR),
+  validar(validarAtualizarAvaliacao),
+  atualizarAvaliacao
+);
+
 export default r;
