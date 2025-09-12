@@ -1,0 +1,37 @@
+{
+  "name": "api",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only ./src/servidor.ts",
+    "build": "tsc -p tsconfig.json",
+    "typeorm": "typeorm-ts-node-commonjs -d ./src/data-source.ts",
+    "migracao:gerar": "npm run typeorm -- migration:generate ./src/migracoes/Init",
+    "migracao:rodar": "npm run typeorm -- migration:run",
+    "semente": "ts-node ./src/seed.ts"
+  },
+  "dependencies": {
+    "@imc/shared": "file:../../packages/shared",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.11.1",
+    "reflect-metadata": "^0.1.14",
+    "sqlite3": "^5.1.7",
+    "typeorm": "^0.3.26"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^24.3.1",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.9.2"
+  }
+}
