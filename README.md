@@ -101,12 +101,6 @@ Abra:
 - `POST /avaliacoes` (ADMIN/PROF)
 - `PATCH /avaliacoes/:id` (ADMIN / PROF apenas as dele)
 
-## Problemas comuns
-
-- **“Configuração JWT ausente”**: confira `JWT_SECRETO` em `apps/api/.env` e reinicie a API.
-- **Erro Zod estranho (traits/normalizeDef)**: garanta **uma única versão** de `zod` (ex.: `^3.22.4`).  
-  Se precisar, apague `node_modules` e rode `npm install` novamente.
-- **Não cria tabelas**: rode as migrações (`migration:run`) antes da API subir.
 
 ## Scripts Uteis
 ```bash
