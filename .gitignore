@@ -1,2 +1,7 @@
 ﻿node_modules
-
+dist
+.iml
+.DS_Store
+.env
+apps/api/imc.sqlite
+apps/api/.env

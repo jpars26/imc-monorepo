@@ -19,7 +19,7 @@ export type Avaliacao = {
   pesoKg: number;
   imc: number;
   classificacao: string;
-  avaliadoEm: string; // ISO string
+  avaliadoEm: string; 
 };
 
 // ========== AUTH ==========

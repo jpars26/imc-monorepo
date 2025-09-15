@@ -27,7 +27,7 @@ export function AutenticacaoProvider({ children }: { children: React.ReactNode }
     (async () => {
       try {
         setToken(t);
-        const me = await buscarMe(t);      // <-- agora chama /auth/me
+        const me = await buscarMe(t);     
         setUsuario(me);
       } catch (e: any) {
         // Só limpa token se for realmente auth error (401/403)

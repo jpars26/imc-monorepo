@@ -3,7 +3,14 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
-import { Box, Button, Heading, Stack, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Heading,
+  Stack,
+  Text,
+  Image, 
+} from "@chakra-ui/react";
 import { useAutenticacao } from "../../contexts/AutenticacaoContexto";
 import { buscarMe } from "../../lib/api";
 import { Guard } from "../../components/Guard";
@@ -24,9 +31,26 @@ function PainelConteudo() {
 
   return (
     <Box p={6}>
-      <Stack direction="row" justify="space-between" align="center" mb={6}>
-        <Heading size="lg">Painel</Heading>
-        <Button variant="outline" onClick={sair}>Sair</Button>
+
+      <Stack
+        direction="row"
+        justify="space-between"
+        align="center"
+        mb={6}
+      >
+        <Stack direction="row" align="center" gap={3}>
+
+          <Image
+            src="/logo.svg"
+            alt="Logo da empresa"
+            boxSize={{ base: "100px", md: "100px" }} 
+          />
+          <Heading size="lg">Painel</Heading>
+        </Stack>
+
+        <Button variant="outline" onClick={sair}>
+          Sair
+        </Button>
       </Stack>
 
       <Box bg="gray.50" p={4} borderRadius="md">
@@ -36,7 +60,7 @@ function PainelConteudo() {
         <Text><b>Status:</b> {usuario?.ativo ? "Ativo" : "Inativo"}</Text>
       </Box>
 
-      <Stack direction="row" mt={6}>
+      <Stack direction="row" mt={6} gap={3} wrap="wrap">
         {/* qualquer autenticado */}
         <Button asChild>
           <Link href="/avaliacoes">Avaliações</Link>
@@ -61,7 +85,6 @@ function PainelConteudo() {
 }
 
 export default function PainelPage() {
-  // o Guard garante: esperar hidratar, exigir token; mostra spinner enquanto isso
   return (
     <Guard>
       <PainelConteudo />
