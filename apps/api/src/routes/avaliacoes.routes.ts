@@ -4,9 +4,9 @@ import { validar } from "../middlewares/validar";
 import {
   listarAvaliacoes,
   criarAvaliacao,
-  atualizarAvaliacao,           // 👈 novo
+  atualizarAvaliacao,           
   validarCriarAvaliacao,
-  validarAtualizarAvaliacao,    // 👈 novo
+  validarAtualizarAvaliacao,    
 } from "../controllers/avaliacoes.controller";
 import { Cargo } from "@imc/shared";
 

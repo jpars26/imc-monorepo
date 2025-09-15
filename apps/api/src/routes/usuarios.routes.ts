@@ -9,7 +9,7 @@ import {
   deletarUsuario,
   validarCriarUsuario,
   validarAtualizarUsuario,
-  listarAlunosParaProfessor, // 👈 novo
+  listarAlunosParaProfessor,
 } from "../controllers/usuarios.controller";
 import { Cargo } from "@imc/shared";
 
